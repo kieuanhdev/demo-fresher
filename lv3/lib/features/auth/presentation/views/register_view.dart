@@ -81,7 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
                       Obx(
                         () => AppButton(
                           label: LocaleKeys.auth_register.tr,
-                          loading: controller.isLoading.value,
+                          loading: controller.isShowLoading.value,
                           color: AppColors.primary,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

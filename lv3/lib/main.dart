@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -10,7 +11,6 @@ import 'core/theme/theme_service.dart';
 
 import 'core/localization/app_translations.dart';
 import 'core/localization/language_enum.dart';
-import 'core/localization/locale_keys.g.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +31,11 @@ class SdsApp extends StatelessWidget {
       locale: LanguageEnum.loadLocale,
       supportedLocales: LanguageEnum.locales,
       fallbackLocale: LanguageEnum.english.locale,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeService().theme,

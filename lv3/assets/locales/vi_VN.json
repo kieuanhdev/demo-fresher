@@ -44,5 +44,14 @@
     "createAccount": "Tạo tài khoản mới",
     "username": "Tên đăng nhập",
     "password": "Mật khẩu"
+  },
+  "profile": {
+    "title": "Hồ sơ",
+    "theme": "Giao diện",
+    "language": "Ngôn ngữ",
+    "light": "Sáng",
+    "dark": "Tối",
+    "vietnamese": "Tiếng Việt",
+    "english": "Tiếng Anh"
   }
 }

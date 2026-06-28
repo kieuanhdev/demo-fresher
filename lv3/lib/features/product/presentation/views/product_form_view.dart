@@ -55,7 +55,7 @@ class _ProductFormViewState extends State<ProductFormView> {
         child: Obx(
           () => AppButton(
             label: _isEdit ? 'Update' : 'Create',
-            loading: controller.isSaving.value,
+            loading: controller.isLoadingOverlay.value,
             onPressed: _submit,
           ),
         ),

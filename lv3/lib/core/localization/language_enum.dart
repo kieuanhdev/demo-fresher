@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 enum LanguageEnum {
@@ -24,5 +25,14 @@ enum LanguageEnum {
     }
     // Default to English
     return LanguageEnum.english.locale;
+  }
+
+  static void changeLanguage(LanguageEnum language) {
+    final box = GetStorage();
+    box.write(
+      'languageKey',
+      '${language.languageCode}_${language.countryCode}',
+    );
+    Get.updateLocale(language.locale);
   }
 }

@@ -11,6 +11,31 @@ import 'base_controller.dart';
 abstract class BaseView<T extends BaseController> extends GetView<T> {
   const BaseView({super.key});
 
+  /// Bọc giao diện lại với lớp màn chặn khi đang thao tác (Loading Overlay)
+  Widget withLoadingOverlay({required Widget child}) {
+    return Stack(
+      children: [
+        child,
+        Obx(() {
+          if (controller.isLoadingOverlay.value) {
+            return const Stack(
+              children: [
+                ModalBarrier(
+                  color: Colors.black54,
+                  dismissible: false,
+                ),
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        }),
+      ],
+    );
+  }
+
   /// Lớp bọc phản ứng:
   /// - hiển thị [loading] (mặc định là shimmer) ở lần tải đầu khi chưa có dữ liệu
   /// - hiển thị view lỗi (kèm retry) khi thất bại mà chưa có dữ liệu
@@ -24,7 +49,7 @@ abstract class BaseView<T extends BaseController> extends GetView<T> {
     Widget? empty,
   }) {
     return Obx(() {
-      if (controller.isLoading.value && isEmpty()) {
+      if (controller.isShowLoading.value && isEmpty()) {
         return loading ?? const ListSkeleton();
       }
       if (controller.error.value != null && isEmpty()) {

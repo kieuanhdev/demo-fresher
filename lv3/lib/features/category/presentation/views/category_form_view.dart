@@ -38,7 +38,7 @@ class _CategoryFormViewState extends State<CategoryFormView> {
         child: Obx(
           () => AppButton(
             label: _isEdit ? 'Update' : 'Create',
-            loading: controller.isSaving.value,
+            loading: controller.isLoadingOverlay.value,
             onPressed: _submit,
           ),
         ),

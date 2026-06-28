@@ -3,25 +3,31 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ThemeService {
-  final _storage = GetStorage();
-  final _key = 'isDarkMode';
+  static final _storage = GetStorage();
+  static final _key = 'isDarkMode';
+
+  static final RxBool isDarkMode = _loadThemeFromStorage().obs;
 
   /// Lấy theme mode đang được lưu
   ThemeMode get theme {
-    return _loadThemeFromStorage() ? ThemeMode.dark : ThemeMode.light;
+    return isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
   }
 
-  bool _loadThemeFromStorage() {
+  static bool _loadThemeFromStorage() {
     return _storage.read<bool>(_key) ?? false;
   }
 
   /// Thay đổi theme giữa Light và Dark
   void switchTheme() {
-    Get.changeThemeMode(_loadThemeFromStorage() ? ThemeMode.light : ThemeMode.dark);
-    _saveThemeToStorage(!_loadThemeFromStorage());
+    isDarkMode.value = !isDarkMode.value;
+    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+    _saveThemeToStorage(isDarkMode.value);
+    
+    // Cập nhật toàn bộ app ngay lập tức (không delay) để màu sắc đồng bộ
+    Get.forceAppUpdate();
   }
 
-  void _saveThemeToStorage(bool isDarkMode) {
-    _storage.write(_key, isDarkMode);
+  void _saveThemeToStorage(bool isDark) {
+    _storage.write(_key, isDark);
   }
 }

@@ -10,6 +10,8 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../core/localization/language_enum.dart';
+import '../../../../core/theme/theme_service.dart';
 import '../controllers/auth_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -44,6 +46,8 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                _buildTopActions(),
+                const SizedBox(height: 16),
                 _logo(),
                 const SizedBox(height: 28),
                 AppText.display('Welcome back'),
@@ -73,9 +77,11 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                       minLength(6),
                     ]),
                     suffix: IconButton(
-                      icon: Icon(controller.obscure.value
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined),
+                      icon: Icon(
+                        controller.obscure.value
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                      ),
                       onPressed: controller.toggleObscure,
                     ),
                   ),
@@ -84,7 +90,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                 Obx(
                   () => AppButton(
                     label: LocaleKeys.auth_login.tr,
-                    loading: controller.isLoading.value,
+                    loading: controller.isShowLoading.value,
                     onPressed: () {
                       context.hideKeyboard();
                       if (_formKey.currentState!.validate()) {
@@ -120,7 +126,63 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
         gradient: AppColors.brandGradient,
         borderRadius: BorderRadius.circular(18),
       ),
-      child: const Icon(Icons.storefront_rounded, size: 32, color: Colors.white),
+      child: const Icon(
+        Icons.storefront_rounded,
+        size: 32,
+        color: Colors.white,
+      ),
     );
+  }
+
+  Widget _buildTopActions() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          DropdownButton<LanguageEnum>(
+            value: _getCurrentLanguage(),
+            underline: const SizedBox(),
+            icon: const Icon(Icons.language_outlined, size: 20),
+            items: [
+              DropdownMenuItem(
+                value: LanguageEnum.english,
+                child: AppText.body('EN', fontWeight: FontWeight.w600),
+              ),
+              DropdownMenuItem(
+                value: LanguageEnum.vietnamese,
+                child: AppText.body('VN', fontWeight: FontWeight.w600),
+              ),
+            ],
+            onChanged: (LanguageEnum? newValue) {
+              if (newValue != null) {
+                LanguageEnum.changeLanguage(newValue);
+              }
+            },
+          ),
+          const SizedBox(width: 8),
+          Obx(() {
+            final isDark = ThemeService.isDarkMode.value;
+            return IconButton(
+              icon: Icon(
+                isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                size: 24,
+              ),
+              onPressed: () {
+                ThemeService().switchTheme();
+              },
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  LanguageEnum _getCurrentLanguage() {
+    final locale = Get.locale;
+    if (locale?.languageCode == 'vi') {
+      return LanguageEnum.vietnamese;
+    }
+    return LanguageEnum.english;
   }
 }

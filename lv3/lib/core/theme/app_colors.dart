@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:lv3/core/theme/theme_service.dart';
 
 class AppColors extends ThemeExtension<AppColors> {
   final Color primaryColor;
@@ -74,7 +74,11 @@ class AppColors extends ThemeExtension<AppColors> {
     if (other is! AppColors) return this;
     return AppColors(
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
-      primaryDarkColor: Color.lerp(primaryDarkColor, other.primaryDarkColor, t)!,
+      primaryDarkColor: Color.lerp(
+        primaryDarkColor,
+        other.primaryDarkColor,
+        t,
+      )!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
       accentColor: Color.lerp(accentColor, other.accentColor, t)!,
       successColor: Color.lerp(successColor, other.successColor, t)!,
@@ -82,19 +86,31 @@ class AppColors extends ThemeExtension<AppColors> {
       dangerColor: Color.lerp(dangerColor, other.dangerColor, t)!,
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
       surfaceColor: Color.lerp(surfaceColor, other.surfaceColor, t)!,
-      surfaceMutedColor: Color.lerp(surfaceMutedColor, other.surfaceMutedColor, t)!,
-      textPrimaryColor: Color.lerp(textPrimaryColor, other.textPrimaryColor, t)!,
-      textSecondaryColor: Color.lerp(textSecondaryColor, other.textSecondaryColor, t)!,
+      surfaceMutedColor: Color.lerp(
+        surfaceMutedColor,
+        other.surfaceMutedColor,
+        t,
+      )!,
+      textPrimaryColor: Color.lerp(
+        textPrimaryColor,
+        other.textPrimaryColor,
+        t,
+      )!,
+      textSecondaryColor: Color.lerp(
+        textSecondaryColor,
+        other.textSecondaryColor,
+        t,
+      )!,
       textMutedColor: Color.lerp(textMutedColor, other.textMutedColor, t)!,
       borderColor: Color.lerp(borderColor, other.borderColor, t)!,
     );
   }
 
   LinearGradient get brandGradientValue => LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [primaryColor, secondaryColor],
-      );
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [primaryColor, secondaryColor],
+  );
 
   // --- THIẾT LẬP LIGHT MODE ---
   static const AppColors light = AppColors(
@@ -135,7 +151,8 @@ class AppColors extends ThemeExtension<AppColors> {
   // --- TRỢ THỦ LẤY THEME HIỆN TẠI (GETX) ---
   static AppColors get current {
     try {
-      return Get.theme.extension<AppColors>() ?? light;
+      // ignore: prefer_const_constructors
+      return ThemeService.isDarkMode.value ? dark : light;
     } catch (_) {
       return light;
     }
@@ -162,10 +179,12 @@ class AppColors extends ThemeExtension<AppColors> {
   static LinearGradient get brandGradient => current.brandGradientValue;
 
   static List<BoxShadow> get softShadow => [
-        BoxShadow(
-          color: const Color(0xFF1B1F3B).withValues(alpha: current == dark ? 0.3 : 0.04),
-          blurRadius: 12,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: const Color(
+        0xFF1B1F3B,
+      ).withValues(alpha: current == dark ? 0.3 : 0.04),
+      blurRadius: 12,
+      offset: const Offset(0, 4),
+    ),
+  ];
 }

@@ -61,7 +61,7 @@ abstract class BaseListController<T> extends BaseController {
 
   /// Nối thêm trang tiếp theo. Không làm gì khi đang tải hoặc đã hết dữ liệu.
   Future<void> loadMore() async {
-    if (isLoadingMore.value || isLoading.value || !hasMore) return;
+    if (isLoadingMore.value || isShowLoading.value || !hasMore) return;
     isLoadingMore.value = true;
     try {
       final next = page + 1;

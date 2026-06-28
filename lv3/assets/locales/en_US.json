@@ -44,5 +44,14 @@
     "createAccount": "Create account",
     "username": "Username",
     "password": "Password"
+  },
+  "profile": {
+    "title": "Profile",
+    "theme": "Theme",
+    "language": "Language",
+    "light": "Light",
+    "dark": "Dark",
+    "vietnamese": "Vietnamese",
+    "english": "English"
   }
 }

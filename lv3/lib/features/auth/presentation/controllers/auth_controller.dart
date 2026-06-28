@@ -22,20 +22,20 @@ class AuthController extends BaseController {
 
   Future<void> login(String username, String password) async {
     if (!_validate(username, password)) return;
-    isLoading.value = true;
+    isShowLoading.value = true;
     try {
       await _loginUc(username.trim(), password);
       Get.offAllNamed(AppRoutes.home);
     } on Failure catch (f) {
       showError(f.message);
     } finally {
-      isLoading.value = false;
+      isShowLoading.value = false;
     }
   }
 
   Future<void> register(String username, String password) async {
     if (!_validate(username, password)) return;
-    isLoading.value = true;
+    isShowLoading.value = true;
     try {
       final msg = await _registerUc(username.trim(), password);
       Get.back();
@@ -43,7 +43,7 @@ class AuthController extends BaseController {
     } on Failure catch (f) {
       showError(f.message);
     } finally {
-      isLoading.value = false;
+      isShowLoading.value = false;
     }
   }
 

@@ -7,6 +7,7 @@ import '../../../cart/presentation/controllers/cart_controller.dart';
 import '../../../cart/presentation/views/cart_view.dart';
 import '../../../category/presentation/views/category_list_view.dart';
 import '../../../product/presentation/views/product_list_view.dart';
+import '../../../profile/presentation/views/profile_view.dart';
 import '../controllers/shell_controller.dart';
 
 /// Home shell: chứa các tab chính phía sau một bottom navigation bar.
@@ -18,6 +19,7 @@ class HomeView extends StatelessWidget {
     ProductListView(),
     const CategoryListView(),
     const CartView(),
+    ProfileView(),
   ];
 
   @override
@@ -74,6 +76,8 @@ class _BottomNav extends StatelessWidget {
                     shell.index.value == 2),
                 label: LocaleKeys.home_cart.tr,
               ),
+              _dest(Icons.person_outline, Icons.person,
+                  LocaleKeys.home_profile.tr, shell.index.value == 3),
             ],
           ),
         ),
