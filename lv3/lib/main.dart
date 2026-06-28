@@ -8,9 +8,14 @@ import 'core/routes/app_routes.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_service.dart';
 
+import 'core/localization/app_translations.dart';
+import 'core/localization/language_enum.dart';
+import 'core/localization/locale_keys.g.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await AppTranslations.loadTranslations();
   runApp(const SdsApp());
 }
 
@@ -22,6 +27,10 @@ class SdsApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'SDS Mobile',
       debugShowCheckedModeBanner: false,
+      translations: AppTranslations(),
+      locale: LanguageEnum.loadLocale,
+      supportedLocales: LanguageEnum.locales,
+      fallbackLocale: LanguageEnum.english.locale,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeService().theme,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_dimens.dart';
+import '../localization/locale_keys.g.dart';
+import 'package:get/get.dart';
 import 'app_text.dart';
 
 /// Placeholder lỗi toàn màn hình kèm nút thử lại.
@@ -28,18 +30,24 @@ class ErrorStateView extends StatelessWidget {
                 color: AppColors.danger.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.cloud_off_rounded,
-                  size: 44, color: AppColors.danger),
+              child: Icon(
+                Icons.cloud_off_rounded,
+                size: 44,
+                color: AppColors.danger,
+              ),
             ),
             AppDimens.gap16,
-            AppText.heading('Something went wrong', textAlign: TextAlign.center),
+            AppText.heading(
+              'Something went wrong',
+              textAlign: TextAlign.center,
+            ),
             AppDimens.gap8,
             AppText.body(message, textAlign: TextAlign.center),
             AppDimens.gap16,
             OutlinedButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh_rounded),
-              label: const Text('Retry'),
+              label: Text(LocaleKeys.common_retry.tr),
             ),
           ],
         ),
@@ -72,7 +80,7 @@ class EmptyStateView extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(22),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: AppColors.surfaceMuted,
                 shape: BoxShape.circle,
               ),
@@ -84,10 +92,7 @@ class EmptyStateView extends StatelessWidget {
               AppDimens.gap8,
               AppText.body(subtitle!, textAlign: TextAlign.center),
             ],
-            if (action != null) ...[
-              AppDimens.gap16,
-              action!,
-            ],
+            if (action != null) ...[AppDimens.gap16, action!],
           ],
         ),
       ),

@@ -1,0 +1,48 @@
+{
+  "app_title": "SDS Mobile",
+  "common": {
+    "add": "Thêm",
+    "edit": "Sửa",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "logout": "Đăng xuất",
+    "retry": "Thử lại",
+    "cancel": "Hủy",
+    "name": "Tên",
+    "code": "Mã",
+    "price": "Giá",
+    "stock": "Tồn kho",
+    "image_url": "URL Hình ảnh",
+    "description": "Mô tả"
+  },
+  "home": {
+    "products": "Sản phẩm",
+    "categories": "Danh mục",
+    "cart": "Giỏ hàng"
+  },
+  "products": {
+    "title": "Sản phẩm",
+    "noProducts": "Không tìm thấy sản phẩm",
+    "deleteProduct": "Xóa sản phẩm",
+    "deleteConfirm": "Bạn có chắc muốn xóa \"@name\"?"
+  },
+  "categories": {
+    "title": "Danh mục",
+    "noCategories": "Chưa có danh mục nào",
+    "deleteCategory": "Xóa danh mục",
+    "deleteConfirm": "Bạn có chắc muốn xóa \"@name\"?"
+  },
+  "cart": {
+    "title": "Giỏ hàng",
+    "emptyCart": "Giỏ hàng của bạn đang trống",
+    "checkout": "Thanh toán",
+    "clearCart": "Xóa giỏ hàng"
+  },
+  "auth": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "createAccount": "Tạo tài khoản mới",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu"
+  }
+}

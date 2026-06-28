@@ -7,6 +7,7 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../../domain/entities/product.dart';
 import '../controllers/product_controller.dart';
 
@@ -70,10 +71,10 @@ class _ProductFormViewState extends State<ProductFormView> {
               children: [
                 _label('Basic info'),
                 AppInput(
-                    controller: _nameCtrl, label: 'Name', required: true),
+                    controller: _nameCtrl, label: LocaleKeys.common_name.tr, required: true),
                 AppDimens.gap12,
                 AppInput(
-                    controller: _codeCtrl, label: 'Code', required: true),
+                    controller: _codeCtrl, label: LocaleKeys.common_code.tr, required: true),
                 _label('Pricing & stock'),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,7 @@ class _ProductFormViewState extends State<ProductFormView> {
                     Expanded(
                       child: AppInput(
                         controller: _priceCtrl,
-                        label: 'Price',
+                        label: LocaleKeys.common_price.tr,
                         keyboardType: const TextInputType.numberWithOptions(
                             decimal: true),
                         inputFormatters: [
@@ -95,7 +96,7 @@ class _ProductFormViewState extends State<ProductFormView> {
                     Expanded(
                       child: AppInput(
                         controller: _stockCtrl,
-                        label: 'Stock',
+                        label: LocaleKeys.common_stock.tr,
                         keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
@@ -127,10 +128,10 @@ class _ProductFormViewState extends State<ProductFormView> {
                   );
                 }),
                 AppDimens.gap12,
-                AppInput(controller: _imageCtrl, label: 'Image URL'),
+                AppInput(controller: _imageCtrl, label: LocaleKeys.common_image_url.tr),
                 AppDimens.gap12,
                 AppInput(
-                    controller: _descCtrl, label: 'Description', maxLines: 3),
+                    controller: _descCtrl, label: LocaleKeys.common_description.tr, maxLines: 3),
               ],
             ),
           ),

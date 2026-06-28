@@ -9,6 +9,7 @@ import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../controllers/auth_controller.dart';
 
 class LoginView extends StatefulWidget {
@@ -51,7 +52,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                 const SizedBox(height: AppDimens.space32),
                 AppInput(
                   controller: _userCtrl,
-                  label: 'Username',
+                  label: LocaleKeys.auth_username.tr,
                   prefixIcon: Icons.person_outline,
                   required: true,
                   validator: compose([
@@ -63,7 +64,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                 Obx(
                   () => AppInput(
                     controller: _passCtrl,
-                    label: 'Password',
+                    label: LocaleKeys.auth_password.tr,
                     prefixIcon: Icons.lock_outline,
                     obscure: controller.obscure.value,
                     required: true,
@@ -82,7 +83,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                 const SizedBox(height: AppDimens.space24),
                 Obx(
                   () => AppButton(
-                    label: 'Login',
+                    label: LocaleKeys.auth_login.tr,
                     loading: controller.isLoading.value,
                     onPressed: () {
                       context.hideKeyboard();
@@ -99,7 +100,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                     AppText.body("Don't have an account?"),
                     TextButton(
                       onPressed: () => Get.toNamed(AppRoutes.register),
-                      child: const Text('Register'),
+                      child: Text(LocaleKeys.auth_register.tr),
                     ),
                   ],
                 ),

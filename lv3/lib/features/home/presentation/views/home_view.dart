@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/localization/locale_keys.g.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../cart/presentation/controllers/cart_controller.dart';
 import '../../../cart/presentation/views/cart_view.dart';
@@ -38,7 +39,7 @@ class _BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = Get.find<CartController>();
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.surface,
         border: Border(top: BorderSide(color: AppColors.border)),
       ),
@@ -65,13 +66,13 @@ class _BottomNav extends StatelessWidget {
             onDestinationSelected: shell.go,
             destinations: [
               _dest(Icons.inventory_2_outlined, Icons.inventory_2_rounded,
-                  'Products', shell.index.value == 0),
+                  LocaleKeys.home_products.tr, shell.index.value == 0),
               _dest(Icons.category_outlined, Icons.category_rounded,
-                  'Categories', shell.index.value == 1),
+                  LocaleKeys.home_categories.tr, shell.index.value == 1),
               NavigationDestination(
                 icon: _cartIcon(cart.count, Icons.shopping_cart_outlined,
                     shell.index.value == 2),
-                label: 'Cart',
+                label: LocaleKeys.home_cart.tr,
               ),
             ],
           ),

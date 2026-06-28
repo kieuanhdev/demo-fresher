@@ -10,6 +10,7 @@ import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/state_views.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../cart/presentation/controllers/cart_controller.dart';
 import '../../domain/entities/product.dart';
@@ -32,7 +33,7 @@ class ProductListView extends BaseView<ProductController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Products',
+      title: LocaleKeys.products_title.tr,
       actions: [
         IconButton(
           tooltip: 'Refresh',
@@ -49,7 +50,7 @@ class ProductListView extends BaseView<ProductController> {
         heroTag: 'fab_products',
         onPressed: () => Get.toNamed(AppRoutes.productForm),
         icon: const Icon(Icons.add_rounded),
-        label: const Text('Add'),
+        label: Text(LocaleKeys.common_add.tr),
       ),
       body: Column(
         children: [
@@ -58,10 +59,10 @@ class ProductListView extends BaseView<ProductController> {
             child: stateBuilder(
               isEmpty: () => controller.products.isEmpty,
               onRetry: controller.refreshList,
-              empty: const EmptyStateView(
+              empty: EmptyStateView(
                 icon: Icons.inventory_2_outlined,
-                title: 'No products found',
-                subtitle: 'Try adjusting filters or add a new product.',
+                title: LocaleKeys.products_noProducts.tr,
+                subtitle: '',
               ),
               content: () => RefreshIndicator(
                 onRefresh: controller.refreshList,
@@ -186,11 +187,11 @@ class ProductListView extends BaseView<ProductController> {
                       // Decode ở khoảng kích thước hiển thị (56dp @3x) thay vì full res.
                       cacheWidth: 168,
                       cacheHeight: 168,
-                      errorBuilder: (_, __, ___) => const Icon(
+                      errorBuilder: (_, __, ___) => Icon(
                           Icons.inventory_2_rounded,
                           color: AppColors.textMuted),
                     )
-                  : const Icon(Icons.inventory_2_rounded,
+                  : Icon(Icons.inventory_2_rounded,
                       color: AppColors.textMuted),
             ),
           ),
@@ -219,7 +220,7 @@ class ProductListView extends BaseView<ProductController> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               PopupMenuButton<String>(
-                icon: const Icon(Icons.more_vert_rounded,
+                icon: Icon(Icons.more_vert_rounded,
                     color: AppColors.textMuted),
                 onSelected: (v) {
                   if (v == 'edit') {
@@ -228,9 +229,9 @@ class ProductListView extends BaseView<ProductController> {
                     _confirmDelete(p);
                   }
                 },
-                itemBuilder: (_) => const [
-                  PopupMenuItem(value: 'edit', child: Text('Edit')),
-                  PopupMenuItem(value: 'delete', child: Text('Delete')),
+                itemBuilder: (_) => [
+                  PopupMenuItem(value: 'edit', child: Text(LocaleKeys.common_edit.tr)),
+                  PopupMenuItem(value: 'delete', child: Text(LocaleKeys.common_delete.tr)),
                 ],
               ),
               _addToCartBtn(p),
@@ -267,18 +268,18 @@ class ProductListView extends BaseView<ProductController> {
       borderRadius: 14,
       duration: const Duration(seconds: 2),
       backgroundColor: AppColors.textPrimary.withValues(alpha: 0.92),
-      colorText: Colors.white,
-      icon: const Icon(Icons.check_circle_rounded, color: Colors.white),
+      colorText: AppColors.surface,
+      icon: Icon(Icons.check_circle_rounded, color: AppColors.surface),
     );
   }
 
   void _confirmLogout() {
     Get.defaultDialog(
-      title: 'Logout',
+      title: LocaleKeys.common_logout.tr,
       titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: 'Are you sure you want to log out?',
-      textCancel: 'Cancel',
-      textConfirm: 'Logout',
+      middleText: '',
+      textCancel: LocaleKeys.common_cancel.tr,
+      textConfirm: LocaleKeys.common_logout.tr,
       confirmTextColor: Colors.white,
       buttonColor: AppColors.danger,
       onConfirm: () {
@@ -301,11 +302,11 @@ class ProductListView extends BaseView<ProductController> {
 
   void _confirmDelete(Product p) {
     Get.defaultDialog(
-      title: 'Delete product',
+      title: LocaleKeys.products_deleteProduct.tr,
       titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: 'Delete "${p.name}"?',
-      textCancel: 'Cancel',
-      textConfirm: 'Delete',
+      middleText: LocaleKeys.products_deleteConfirm.trParams({'name': p.name}),
+      textCancel: LocaleKeys.common_cancel.tr,
+      textConfirm: LocaleKeys.common_delete.tr,
       confirmTextColor: Colors.white,
       buttonColor: AppColors.danger,
       onConfirm: () {

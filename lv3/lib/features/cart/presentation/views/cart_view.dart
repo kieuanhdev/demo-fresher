@@ -7,6 +7,7 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/state_views.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../../domain/entities/cart_item.dart';
 import '../controllers/cart_controller.dart';
 
@@ -17,7 +18,7 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = Get.find<CartController>();
     return AppScaffold(
-      title: 'Cart',
+      title: LocaleKeys.cart_title.tr,
       leading: const SizedBox.shrink(),
       actions: [
         Obx(
@@ -35,10 +36,10 @@ class CartView extends StatelessWidget {
       ),
       body: Obx(() {
         if (cart.isEmpty) {
-          return const EmptyStateView(
+          return EmptyStateView(
             icon: Icons.shopping_cart_outlined,
-            title: 'Your cart is empty',
-            subtitle: 'Add products from the Products tab.',
+            title: LocaleKeys.cart_emptyCart.tr,
+            subtitle: '',
           );
         }
         return ListView.separated(
@@ -66,10 +67,10 @@ class CartView extends StatelessWidget {
               child: hasImage
                   ? Image.network(p.image!,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(
+                      errorBuilder: (_, __, ___) => Icon(
                           Icons.inventory_2_rounded,
                           color: AppColors.textMuted))
-                  : const Icon(Icons.inventory_2_rounded,
+                  : Icon(Icons.inventory_2_rounded,
                       color: AppColors.textMuted),
             ),
           ),
@@ -136,7 +137,7 @@ class CartView extends StatelessWidget {
           ),
           AppDimens.gap12,
           AppButton(
-            label: 'Checkout',
+            label: LocaleKeys.cart_checkout.tr,
             icon: Icons.check_rounded,
             onPressed: () => _checkout(cart),
           ),
@@ -162,11 +163,11 @@ class CartView extends StatelessWidget {
 
   void _confirmClear(CartController cart) {
     Get.defaultDialog(
-      title: 'Clear cart',
+      title: LocaleKeys.cart_clearCart.tr,
       titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: 'Remove all items from the cart?',
-      textCancel: 'Cancel',
-      textConfirm: 'Clear',
+      middleText: '',
+      textCancel: LocaleKeys.common_cancel.tr,
+      textConfirm: LocaleKeys.cart_clearCart.tr,
       confirmTextColor: Colors.white,
       buttonColor: AppColors.danger,
       onConfirm: () {

@@ -39,10 +39,10 @@ class _AppShimmerState extends State<AppShimmer>
             return LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: const [
-                Color(0xFFE9ECF5),
-                Color(0xFFF6F7FB),
-                Color(0xFFE9ECF5),
+              colors: [
+                AppColors.surfaceMuted,
+                AppColors.surface,
+                AppColors.surfaceMuted,
               ],
               stops: const [0.35, 0.5, 0.65],
               transform: _SlideGradient(dx),
@@ -82,7 +82,7 @@ class SkeletonBox extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: const Color(0xFFE9ECF5),
+        color: AppColors.surfaceMuted,
         borderRadius: BorderRadius.circular(radius),
       ),
     );

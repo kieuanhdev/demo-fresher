@@ -5,6 +5,7 @@ import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_scaffold.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../../domain/entities/category.dart';
 import '../controllers/category_controller.dart';
 
@@ -50,7 +51,7 @@ class _CategoryFormViewState extends State<CategoryFormView> {
             key: _formKey,
             child: AppInput(
               controller: _nameCtrl,
-              label: 'Name',
+              label: LocaleKeys.common_name.tr,
               required: true,
               autofocus: true,
             ),

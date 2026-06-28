@@ -1,0 +1,48 @@
+{
+  "app_title": "SDS Mobile",
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "logout": "Logout",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "name": "Name",
+    "code": "Code",
+    "price": "Price",
+    "stock": "Stock",
+    "image_url": "Image URL",
+    "description": "Description"
+  },
+  "home": {
+    "products": "Products",
+    "categories": "Categories",
+    "cart": "Cart"
+  },
+  "products": {
+    "title": "Products",
+    "noProducts": "No products found",
+    "deleteProduct": "Delete product",
+    "deleteConfirm": "Delete \"@name\"?"
+  },
+  "categories": {
+    "title": "Categories",
+    "noCategories": "No categories yet",
+    "deleteCategory": "Delete category",
+    "deleteConfirm": "Delete \"@name\"?"
+  },
+  "cart": {
+    "title": "Cart",
+    "emptyCart": "Your cart is empty",
+    "checkout": "Checkout",
+    "clearCart": "Clear cart"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "createAccount": "Create account",
+    "username": "Username",
+    "password": "Password"
+  }
+}

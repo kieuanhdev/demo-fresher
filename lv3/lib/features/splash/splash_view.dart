@@ -61,7 +61,7 @@ class _SplashViewState extends State<SplashView>
               const SizedBox(height: 6),
               AppText.body('Inventory Management'),
               const SizedBox(height: 36),
-              const SizedBox(
+              SizedBox(
                 height: 22,
                 width: 22,
                 child: CircularProgressIndicator(

@@ -7,6 +7,7 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../controllers/auth_controller.dart';
 
 class RegisterView extends StatefulWidget {
@@ -32,7 +33,7 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Create account',
+      title: LocaleKeys.auth_createAccount.tr,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppDimens.space24),
@@ -54,7 +55,7 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       AppInput(
                         controller: _userCtrl,
-                        label: 'Username',
+                        label: LocaleKeys.auth_username.tr,
                         prefixIcon: Icons.person_outline,
                         required: true,
                       ),
@@ -62,7 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
                       Obx(
                         () => AppInput(
                           controller: _passCtrl,
-                          label: 'Password',
+                          label: LocaleKeys.auth_password.tr,
                           prefixIcon: Icons.lock_outline,
                           obscure: controller.obscure.value,
                           suffix: IconButton(
@@ -79,7 +80,7 @@ class _RegisterViewState extends State<RegisterView> {
                       AppDimens.gap24,
                       Obx(
                         () => AppButton(
-                          label: 'Register',
+                          label: LocaleKeys.auth_register.tr,
                           loading: controller.isLoading.value,
                           color: AppColors.primary,
                           onPressed: () {

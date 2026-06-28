@@ -8,6 +8,7 @@ import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/state_views.dart';
+import '../../../../core/localization/locale_keys.g.dart';
 import '../../domain/entities/category.dart';
 import '../controllers/category_controller.dart';
 
@@ -17,7 +18,7 @@ class CategoryListView extends BaseView<CategoryController> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Categories',
+      title: LocaleKeys.categories_title.tr,
       actions: [
         IconButton(
           tooltip: 'Refresh',
@@ -29,15 +30,15 @@ class CategoryListView extends BaseView<CategoryController> {
         heroTag: 'fab_categories',
         onPressed: () => Get.toNamed(AppRoutes.categoryForm),
         icon: const Icon(Icons.add_rounded),
-        label: const Text('Add'),
+        label: Text(LocaleKeys.common_add.tr),
       ),
       body: stateBuilder(
         isEmpty: () => controller.categories.isEmpty,
         onRetry: controller.fetch,
-        empty: const EmptyStateView(
+        empty: EmptyStateView(
           icon: Icons.category_outlined,
-          title: 'No categories yet',
-          subtitle: 'Tap Add to create your first category.',
+          title: LocaleKeys.categories_noCategories.tr,
+          subtitle: '',
         ),
         content: () => RefreshIndicator(
           onRefresh: controller.fetch,
@@ -65,7 +66,7 @@ class CategoryListView extends BaseView<CategoryController> {
               color: AppColors.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(Icons.folder_rounded, color: AppColors.primary),
+            child: Icon(Icons.folder_rounded, color: AppColors.primary),
           ),
           AppDimens.gap12,
           Expanded(
@@ -79,11 +80,11 @@ class CategoryListView extends BaseView<CategoryController> {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.edit_outlined, color: AppColors.primary),
+            icon: Icon(Icons.edit_outlined, color: AppColors.primary),
             onPressed: () => Get.toNamed(AppRoutes.categoryForm, arguments: c),
           ),
           IconButton(
-            icon: const Icon(Icons.delete_outline, color: AppColors.danger),
+            icon: Icon(Icons.delete_outline, color: AppColors.danger),
             onPressed: () => _confirmDelete(c),
           ),
         ],
@@ -93,11 +94,11 @@ class CategoryListView extends BaseView<CategoryController> {
 
   void _confirmDelete(Category c) {
     Get.defaultDialog(
-      title: 'Delete category',
+      title: LocaleKeys.categories_deleteCategory.tr,
       titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: 'Delete "${c.name}"?',
-      textCancel: 'Cancel',
-      textConfirm: 'Delete',
+      middleText: LocaleKeys.categories_deleteConfirm.trParams({'name': c.name}),
+      textCancel: LocaleKeys.common_cancel.tr,
+      textConfirm: LocaleKeys.common_delete.tr,
       confirmTextColor: Colors.white,
       buttonColor: AppColors.danger,
       onConfirm: () {
