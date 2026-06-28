@@ -1,7 +1,10 @@
 import '../../domain/entities/category.dart';
 
-class CategoryModel extends Category {
-  const CategoryModel({required super.id, required super.name});
+class CategoryModel {
+  final int id;
+  final String name;
+
+  const CategoryModel({required this.id, required this.name});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     return CategoryModel(
@@ -11,6 +14,8 @@ class CategoryModel extends Category {
   }
 
   Map<String, dynamic> toJson() => {'name': name};
+
+  Category toEntity() => Category(id: id, name: name);
 
   static int _toInt(dynamic v) {
     if (v is int) return v;

@@ -14,7 +14,7 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<ProductPage> getProducts(ProductQuery query) => _guard(() async {
         final raw = await _remote.getProducts(query);
         return ProductPage(
-          items: raw.items,
+          items: raw.items.map((e) => e.toEntity()).toList(),
           page: query.page,
           limit: query.limit,
           total: raw.total,
@@ -22,12 +22,18 @@ class ProductRepositoryImpl implements ProductRepository {
       });
 
   @override
-  Future<Product> createProduct(Product product) =>
-      _guard(() => _remote.createProduct(ProductModel.fromEntity(product)));
+  Future<Product> createProduct(Product product) => _guard(() async {
+        final model =
+            await _remote.createProduct(ProductModel.fromEntity(product));
+        return model.toEntity();
+      });
 
   @override
-  Future<Product> updateProduct(int id, Product product) => _guard(
-      () => _remote.updateProduct(id, ProductModel.fromEntity(product)));
+  Future<Product> updateProduct(int id, Product product) => _guard(() async {
+        final model = await _remote.updateProduct(
+            id, ProductModel.fromEntity(product));
+        return model.toEntity();
+      });
 
   @override
   Future<void> deleteProduct(int id) =>

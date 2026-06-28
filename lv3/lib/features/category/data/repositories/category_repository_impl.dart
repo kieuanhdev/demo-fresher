@@ -9,15 +9,22 @@ class CategoryRepositoryImpl implements CategoryRepository {
   CategoryRepositoryImpl(this._remote);
 
   @override
-  Future<List<Category>> getCategories() => _guard(_remote.getCategories);
+  Future<List<Category>> getCategories() => _guard(() async {
+        final models = await _remote.getCategories();
+        return models.map((e) => e.toEntity()).toList();
+      });
 
   @override
-  Future<Category> createCategory(String name) =>
-      _guard(() => _remote.createCategory(name));
+  Future<Category> createCategory(String name) => _guard(() async {
+        final model = await _remote.createCategory(name);
+        return model.toEntity();
+      });
 
   @override
-  Future<Category> updateCategory(int id, String name) =>
-      _guard(() => _remote.updateCategory(id, name));
+  Future<Category> updateCategory(int id, String name) => _guard(() async {
+        final model = await _remote.updateCategory(id, name);
+        return model.toEntity();
+      });
 
   @override
   Future<void> deleteCategory(int id) =>
