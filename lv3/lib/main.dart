@@ -6,6 +6,7 @@ import 'core/di/initial_binding.dart';
 import 'core/routes/app_pages.dart';
 import 'core/routes/app_routes.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,8 @@ class SdsApp extends StatelessWidget {
       title: 'SDS Mobile',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeService().theme,
       initialBinding: InitialBinding(),
       initialRoute: AppRoutes.splash,
       getPages: AppPages.routes,
