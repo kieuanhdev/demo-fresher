@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
 
 import '../constants/api_constants.dart';
 import '../routes/app_routes.dart';
@@ -25,16 +25,24 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
+  void onResponse(Response<dynamic> response, ResponseInterceptorHandler handler) {
+    if (response.statusCode == 401 && !_isAuthPath(response.requestOptions.path)) {
+      _storage.clearToken();
+      _redirectToLogin();
+    }
+    handler.next(response);
+  }
+
+  @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401 && !_isAuthRequest(err)) {
+    if (err.response?.statusCode == 401 && !_isAuthPath(err.requestOptions.path)) {
       _storage.clearToken();
       _redirectToLogin();
     }
     handler.next(err);
   }
 
-  bool _isAuthRequest(DioException err) {
-    final path = err.requestOptions.path;
+  bool _isAuthPath(String path) {
     return _authPaths.any(path.endsWith);
   }
 
