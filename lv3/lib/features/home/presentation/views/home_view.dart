@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../generated/locales.g.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../cart/presentation/controllers/cart_controller.dart';
 import '../../../cart/presentation/views/cart_view.dart';
@@ -75,7 +75,7 @@ class _BottomNav extends StatelessWidget {
                 label: LocaleKeys.home_cart.tr,
               ),
               _dest(Icons.person_outline, Icons.person,
-                  LocaleKeys.home_profile.tr, shell.index.value == 3),
+                  LocaleKeys.profile_title.tr, shell.index.value == 3),
             ],
           ),
         ),

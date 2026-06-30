@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../localization/locale_keys.g.dart';
+import '../../generated/locales.g.dart';
 import '../theme/app_colors.dart';
 
 class AppDialogs {

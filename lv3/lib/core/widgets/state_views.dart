@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_dimens.dart';
-import '../localization/locale_keys.g.dart';
+import '../../generated/locales.g.dart';
 import 'package:get/get.dart';
 import 'app_text.dart';
 

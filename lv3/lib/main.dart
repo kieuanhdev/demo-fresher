@@ -15,7 +15,6 @@ import 'core/localization/language_enum.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  await AppTranslations.loadTranslations();
   runApp(const SdsApp());
 }
 

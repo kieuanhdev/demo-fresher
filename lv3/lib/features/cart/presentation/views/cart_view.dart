@@ -7,7 +7,7 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/state_views.dart';
-import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../generated/locales.g.dart';
 import '../../../../core/utils/app_dialogs.dart';
 import '../../domain/entities/cart_item.dart';
 import '../controllers/cart_controller.dart';

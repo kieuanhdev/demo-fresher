@@ -7,7 +7,7 @@ import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_input.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
-import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../generated/locales.g.dart';
 import '../../domain/entities/product.dart';
 import '../controllers/product_controller.dart';
 

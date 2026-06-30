@@ -8,7 +8,7 @@ import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/state_views.dart';
-import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../generated/locales.g.dart';
 import '../../../../core/utils/app_dialogs.dart';
 import '../../domain/entities/category.dart';
 import '../controllers/category_controller.dart';
