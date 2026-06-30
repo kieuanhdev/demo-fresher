@@ -11,14 +11,6 @@ import '../../features/auth/domain/usecases/register_usecase.dart';
 import '../../features/auth/presentation/controllers/auth_controller.dart';
 import '../../features/cart/presentation/controllers/cart_controller.dart';
 import '../../features/home/presentation/controllers/shell_controller.dart';
-import '../../features/category/data/datasources/category_remote_datasource.dart';
-import '../../features/category/data/repositories/category_repository_impl.dart';
-import '../../features/category/domain/repositories/category_repository.dart';
-import '../../features/category/domain/usecases/category_usecases.dart';
-import '../../features/product/data/datasources/product_remote_datasource.dart';
-import '../../features/product/data/repositories/product_repository_impl.dart';
-import '../../features/product/domain/repositories/product_repository.dart';
-import '../../features/product/domain/usecases/product_usecases.dart';
 
 /// Đăng ký tất cả dependency cross-cutting + domain một lần khi khởi động.
 /// Controller được tạo lazy bởi các binding theo từng trang.
@@ -50,28 +42,5 @@ class InitialBinding extends Bindings {
     Get.put(ShellController(), permanent: true);
     Get.put(CartController(), permanent: true);
 
-    // Category
-    Get.put<CategoryRemoteDataSource>(CategoryRemoteDataSourceImpl(dio),
-        permanent: true);
-    Get.put<CategoryRepository>(
-      CategoryRepositoryImpl(Get.find()),
-      permanent: true,
-    );
-    Get.put(GetCategoriesUseCase(Get.find()), permanent: true);
-    Get.put(CreateCategoryUseCase(Get.find()), permanent: true);
-    Get.put(UpdateCategoryUseCase(Get.find()), permanent: true);
-    Get.put(DeleteCategoryUseCase(Get.find()), permanent: true);
-
-    // Product
-    Get.put<ProductRemoteDataSource>(ProductRemoteDataSourceImpl(dio),
-        permanent: true);
-    Get.put<ProductRepository>(
-      ProductRepositoryImpl(Get.find()),
-      permanent: true,
-    );
-    Get.put(GetProductsUseCase(Get.find()), permanent: true);
-    Get.put(CreateProductUseCase(Get.find()), permanent: true);
-    Get.put(UpdateProductUseCase(Get.find()), permanent: true);
-    Get.put(DeleteProductUseCase(Get.find()), permanent: true);
   }
 }
