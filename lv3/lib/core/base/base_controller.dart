@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../error/failures.dart';
 import '../theme/app_colors.dart';
+import '../utils/app_dialogs.dart';
 
 /// Lớp cơ sở cho mọi GetxController.
 ///
@@ -69,27 +70,14 @@ abstract class BaseController extends GetxController {
     }
   }
 
-  void showOk(String message) => _snack('Success', message, AppColors.success);
+  void showOk(String message) => AppDialogs.showToast(
+        title: 'Success',
+        message: message,
+      );
 
-  void showError(String message) =>
-      _snack('Error', message, AppColors.danger);
-
-  void _snack(String title, String message, Color color) {
-    Get.snackbar(
-      title,
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      margin: const EdgeInsets.all(12),
-      borderRadius: 14,
-      backgroundColor: color.withValues(alpha: 0.95),
-      colorText: Colors.white,
-      duration: const Duration(seconds: 3),
-      icon: Icon(
-        color == AppColors.success
-            ? Icons.check_circle_rounded
-            : Icons.error_rounded,
-        color: Colors.white,
-      ),
-    );
-  }
+  void showError(String message) => AppDialogs.showToast(
+        title: 'Error',
+        message: message,
+        isError: true,
+      );
 }

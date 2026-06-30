@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/base/base_controller.dart';
@@ -22,10 +23,36 @@ class CategoryController extends BaseController {
 
   bool get isEmpty => categories.isEmpty;
 
+  // --- Form State ---
+  final formKey = GlobalKey<FormState>();
+  final nameCtrl = TextEditingController();
+  Category? editingCategory;
+  bool get isEdit => editingCategory != null;
+
+  void initForm(Category? category) {
+    editingCategory = category;
+    nameCtrl.text = category?.name ?? '';
+  }
+
+  Future<bool> submitForm() async {
+    if (!formKey.currentState!.validate()) return false;
+    final name = nameCtrl.text.trim();
+    final ok = isEdit
+        ? await updateCategory(editingCategory!.id, name)
+        : await createCategory(name);
+    return ok;
+  }
+
   @override
   void onInit() {
     super.onInit();
     fetch();
+  }
+
+  @override
+  void onClose() {
+    nameCtrl.dispose();
+    super.onClose();
   }
 
   Future<void> fetch() async {
@@ -33,7 +60,7 @@ class CategoryController extends BaseController {
     if (result != null) categories.value = result;
   }
 
-  Future<bool> create(String name) => runMutation(() async {
+  Future<bool> createCategory(String name) => runMutation(() async {
         final c = await _createUc(name);
         categories.insert(0, c);
       });

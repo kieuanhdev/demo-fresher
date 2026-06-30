@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/base/base_controller.dart';
@@ -16,11 +17,33 @@ class AuthController extends BaseController {
 
   final obscure = true.obs;
 
+  // --- UI State for Login ---
+  final loginFormKey = GlobalKey<FormState>();
+  final loginUserCtrl = TextEditingController();
+  final loginPassCtrl = TextEditingController();
+
+  // --- UI State for Register ---
+  final registerFormKey = GlobalKey<FormState>();
+  final registerUserCtrl = TextEditingController();
+  final registerPassCtrl = TextEditingController();
+
   bool get isLoggedIn => _repo.isLoggedIn;
 
   void toggleObscure() => obscure.toggle();
 
-  Future<void> login(String username, String password) async {
+  @override
+  void onClose() {
+    loginUserCtrl.dispose();
+    loginPassCtrl.dispose();
+    registerUserCtrl.dispose();
+    registerPassCtrl.dispose();
+    super.onClose();
+  }
+
+  Future<void> submitLogin() async {
+    if (!loginFormKey.currentState!.validate()) return;
+    final username = loginUserCtrl.text;
+    final password = loginPassCtrl.text;
     if (!_validate(username, password)) return;
     isShowLoading.value = true;
     try {
@@ -33,7 +56,10 @@ class AuthController extends BaseController {
     }
   }
 
-  Future<void> register(String username, String password) async {
+  Future<void> submitRegister() async {
+    if (!registerFormKey.currentState!.validate()) return;
+    final username = registerUserCtrl.text;
+    final password = registerPassCtrl.text;
     if (!_validate(username, password)) return;
     isShowLoading.value = true;
     try {

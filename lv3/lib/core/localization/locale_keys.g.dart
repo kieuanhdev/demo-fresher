@@ -12,12 +12,18 @@ class LocaleKeys {
   static const common_logout = 'common_logout';
   static const common_retry = 'common_retry';
   static const common_cancel = 'common_cancel';
+  static const common_confirm = 'common_confirm';
   static const common_name = 'common_name';
   static const common_code = 'common_code';
   static const common_price = 'common_price';
   static const common_stock = 'common_stock';
   static const common_image_url = 'common_image_url';
   static const common_description = 'common_description';
+  static const common_update = 'common_update';
+  static const common_create = 'common_create';
+  static const common_required = 'common_required';
+  static const common_invalid_number = 'common_invalid_number';
+  static const common_invalid_integer = 'common_invalid_integer';
 
   // home
   static const home_products = 'home_products';
@@ -30,12 +36,19 @@ class LocaleKeys {
   static const products_noProducts = 'products_noProducts';
   static const products_deleteProduct = 'products_deleteProduct';
   static const products_deleteConfirm = 'products_deleteConfirm';
+  static const products_editProduct = 'products_editProduct';
+  static const products_newProduct = 'products_newProduct';
+  static const products_basicInfo = 'products_basicInfo';
+  static const products_pricingStock = 'products_pricingStock';
+  static const products_moreDetails = 'products_moreDetails';
 
   // categories
   static const categories_title = 'categories_title';
   static const categories_noCategories = 'categories_noCategories';
   static const categories_deleteCategory = 'categories_deleteCategory';
   static const categories_deleteConfirm = 'categories_deleteConfirm';
+  static const categories_editCategory = 'categories_editCategory';
+  static const categories_newCategory = 'categories_newCategory';
 
   // cart
   static const cart_title = 'cart_title';

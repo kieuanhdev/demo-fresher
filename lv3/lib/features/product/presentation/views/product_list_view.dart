@@ -11,6 +11,7 @@ import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/fade_slide_in.dart';
 import '../../../../core/widgets/state_views.dart';
 import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../core/utils/app_dialogs.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../cart/presentation/controllers/cart_controller.dart';
 import '../../domain/entities/product.dart';
@@ -260,32 +261,15 @@ class ProductListView extends BaseView<ProductController> {
 
   void _addToCart(Product p) {
     _cart.add(p);
-    Get.snackbar(
-      'Added to cart',
-      p.name,
-      snackPosition: SnackPosition.BOTTOM,
-      margin: const EdgeInsets.all(12),
-      borderRadius: 14,
-      duration: const Duration(seconds: 2),
-      backgroundColor: AppColors.textPrimary.withValues(alpha: 0.92),
-      colorText: AppColors.surface,
-      icon: Icon(Icons.check_circle_rounded, color: AppColors.surface),
-    );
+    AppDialogs.showToast(title: 'Added to cart', message: p.name);
   }
 
   void _confirmLogout() {
-    Get.defaultDialog(
+    AppDialogs.showConfirm(
       title: LocaleKeys.common_logout.tr,
-      titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: '',
-      textCancel: LocaleKeys.common_cancel.tr,
+      message: '',
       textConfirm: LocaleKeys.common_logout.tr,
-      confirmTextColor: Colors.white,
-      buttonColor: AppColors.danger,
-      onConfirm: () {
-        Get.back();
-        Get.find<AuthController>().logout();
-      },
+      onConfirm: () => Get.find<AuthController>().logout(),
     );
   }
 
@@ -301,18 +285,11 @@ class ProductListView extends BaseView<ProductController> {
   }
 
   void _confirmDelete(Product p) {
-    Get.defaultDialog(
+    AppDialogs.showConfirm(
       title: LocaleKeys.products_deleteProduct.tr,
-      titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: LocaleKeys.products_deleteConfirm.trParams({'name': p.name}),
-      textCancel: LocaleKeys.common_cancel.tr,
+      message: LocaleKeys.products_deleteConfirm.trParams({'name': p.name}),
       textConfirm: LocaleKeys.common_delete.tr,
-      confirmTextColor: Colors.white,
-      buttonColor: AppColors.danger,
-      onConfirm: () {
-        Get.back();
-        controller.delete(p.id);
-      },
+      onConfirm: () => controller.delete(p.id),
     );
   }
 }

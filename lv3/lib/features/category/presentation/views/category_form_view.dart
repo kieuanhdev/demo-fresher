@@ -9,37 +9,24 @@ import '../../../../core/localization/locale_keys.g.dart';
 import '../../domain/entities/category.dart';
 import '../controllers/category_controller.dart';
 
-class CategoryFormView extends StatefulWidget {
-  const CategoryFormView({super.key});
-
-  @override
-  State<CategoryFormView> createState() => _CategoryFormViewState();
-}
-
-class _CategoryFormViewState extends State<CategoryFormView> {
-  final CategoryController controller = Get.find<CategoryController>();
-  final _formKey = GlobalKey<FormState>();
-  late final Category? _editing = Get.arguments as Category?;
-  late final _nameCtrl = TextEditingController(text: _editing?.name ?? '');
-
-  bool get _isEdit => _editing != null;
-
-  @override
-  void dispose() {
-    _nameCtrl.dispose();
-    super.dispose();
+class CategoryFormView extends GetView<CategoryController> {
+  CategoryFormView({super.key}) {
+    controller.initForm(Get.arguments as Category?);
   }
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: _isEdit ? 'Edit category' : 'New category',
+      title: controller.isEdit ? LocaleKeys.categories_editCategory.tr : LocaleKeys.categories_newCategory.tr,
       bottomBar: FormSaveBar(
         child: Obx(
           () => AppButton(
-            label: _isEdit ? 'Update' : 'Create',
+            label: controller.isEdit ? LocaleKeys.common_update.tr : LocaleKeys.common_create.tr,
             loading: controller.isLoadingOverlay.value,
-            onPressed: _submit,
+            onPressed: () async {
+              final ok = await controller.submitForm();
+              if (ok) Get.back();
+            },
           ),
         ),
       ),
@@ -48,9 +35,9 @@ class _CategoryFormViewState extends State<CategoryFormView> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppDimens.space20),
           child: Form(
-            key: _formKey,
+            key: controller.formKey,
             child: AppInput(
-              controller: _nameCtrl,
+              controller: controller.nameCtrl,
               label: LocaleKeys.common_name.tr,
               required: true,
               autofocus: true,
@@ -59,14 +46,5 @@ class _CategoryFormViewState extends State<CategoryFormView> {
         ),
       ),
     );
-  }
-
-  Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) return;
-    final name = _nameCtrl.text.trim();
-    final ok = _isEdit
-        ? await controller.updateCategory(_editing!.id, name)
-        : await controller.create(name);
-    if (ok) Get.back();
   }
 }

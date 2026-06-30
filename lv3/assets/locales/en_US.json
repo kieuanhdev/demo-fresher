@@ -8,12 +8,18 @@
     "logout": "Logout",
     "retry": "Retry",
     "cancel": "Cancel",
+    "confirm": "Confirm",
     "name": "Name",
     "code": "Code",
     "price": "Price",
     "stock": "Stock",
     "image_url": "Image URL",
-    "description": "Description"
+    "description": "Description",
+    "update": "Update",
+    "create": "Create",
+    "required": "Required",
+    "invalid_number": "Invalid number",
+    "invalid_integer": "Invalid integer"
   },
   "home": {
     "products": "Products",
@@ -24,13 +30,20 @@
     "title": "Products",
     "noProducts": "No products found",
     "deleteProduct": "Delete product",
-    "deleteConfirm": "Delete \"@name\"?"
+    "deleteConfirm": "Delete \"@name\"?",
+    "editProduct": "Edit product",
+    "newProduct": "New product",
+    "basicInfo": "Basic info",
+    "pricingStock": "Pricing & stock",
+    "moreDetails": "More details"
   },
   "categories": {
     "title": "Categories",
     "noCategories": "No categories yet",
     "deleteCategory": "Delete category",
-    "deleteConfirm": "Delete \"@name\"?"
+    "deleteConfirm": "Delete \"@name\"?",
+    "editCategory": "Edit category",
+    "newCategory": "New category"
   },
   "cart": {
     "title": "Cart",

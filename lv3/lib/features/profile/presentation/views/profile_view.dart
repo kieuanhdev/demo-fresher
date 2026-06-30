@@ -7,10 +7,8 @@ import '../../../../core/theme/theme_service.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 
-class ProfileView extends StatelessWidget {
-  ProfileView({super.key});
-
-  final AuthController _authController = Get.find<AuthController>();
+class ProfileView extends GetView<AuthController> {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class ProfileView extends StatelessWidget {
               LocaleKeys.common_logout.tr,
               color: AppColors.danger,
             ),
-            onTap: _authController.logout,
+            onTap: controller.logout,
           ),
         ],
       ),

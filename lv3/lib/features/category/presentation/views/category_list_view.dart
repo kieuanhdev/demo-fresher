@@ -9,6 +9,7 @@ import '../../../../core/widgets/app_scaffold.dart';
 import '../../../../core/widgets/app_text.dart';
 import '../../../../core/widgets/state_views.dart';
 import '../../../../core/localization/locale_keys.g.dart';
+import '../../../../core/utils/app_dialogs.dart';
 import '../../domain/entities/category.dart';
 import '../controllers/category_controller.dart';
 
@@ -93,18 +94,11 @@ class CategoryListView extends BaseView<CategoryController> {
   }
 
   void _confirmDelete(Category c) {
-    Get.defaultDialog(
+    AppDialogs.showConfirm(
       title: LocaleKeys.categories_deleteCategory.tr,
-      titleStyle: const TextStyle(fontWeight: FontWeight.w700),
-      middleText: LocaleKeys.categories_deleteConfirm.trParams({'name': c.name}),
-      textCancel: LocaleKeys.common_cancel.tr,
+      message: LocaleKeys.categories_deleteConfirm.trParams({'name': c.name}),
       textConfirm: LocaleKeys.common_delete.tr,
-      confirmTextColor: Colors.white,
-      buttonColor: AppColors.danger,
-      onConfirm: () {
-        Get.back();
-        controller.delete(c.id);
-      },
+      onConfirm: () => controller.delete(c.id),
     );
   }
 }

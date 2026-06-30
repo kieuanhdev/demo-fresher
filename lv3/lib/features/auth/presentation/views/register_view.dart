@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/widgets/app_button.dart';
@@ -10,25 +11,8 @@ import '../../../../core/widgets/app_text.dart';
 import '../../../../core/localization/locale_keys.g.dart';
 import '../controllers/auth_controller.dart';
 
-class RegisterView extends StatefulWidget {
+class RegisterView extends GetView<AuthController> {
   const RegisterView({super.key});
-
-  @override
-  State<RegisterView> createState() => _RegisterViewState();
-}
-
-class _RegisterViewState extends State<RegisterView> {
-  final AuthController controller = Get.find<AuthController>();
-  final _userCtrl = TextEditingController();
-  final _passCtrl = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    _userCtrl.dispose();
-    _passCtrl.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +33,12 @@ class _RegisterViewState extends State<RegisterView> {
                 padding: const EdgeInsets.all(22),
                 radius: AppDimens.radiusXl,
                 child: Form(
-                  key: _formKey,
+                  key: controller.registerFormKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       AppInput(
-                        controller: _userCtrl,
+                        controller: controller.registerUserCtrl,
                         label: LocaleKeys.auth_username.tr,
                         prefixIcon: Icons.person_outline,
                         required: true,
@@ -62,7 +46,7 @@ class _RegisterViewState extends State<RegisterView> {
                       AppDimens.gap16,
                       Obx(
                         () => AppInput(
-                          controller: _passCtrl,
+                          controller: controller.registerPassCtrl,
                           label: LocaleKeys.auth_password.tr,
                           prefixIcon: Icons.lock_outline,
                           obscure: controller.obscure.value,
@@ -84,10 +68,8 @@ class _RegisterViewState extends State<RegisterView> {
                           loading: controller.isShowLoading.value,
                           color: AppColors.primary,
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              controller.register(
-                                  _userCtrl.text, _passCtrl.text);
-                            }
+                            context.hideKeyboard();
+                            controller.submitRegister();
                           },
                         ),
                       ),

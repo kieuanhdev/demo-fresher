@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 
+import 'package:flutter/material.dart';
+
 import '../constants/api_constants.dart';
 import '../routes/app_routes.dart';
 import '../storage/storage_service.dart';
+import '../utils/app_dialogs.dart';
 
 /// Gắn bearer token vào mọi request; khi gặp 401 thì xóa token và buộc
 /// người dùng quay lại màn hình login (session hết hạn/không hợp lệ).
@@ -50,10 +53,10 @@ class AuthInterceptor extends Interceptor {
     final current = Get.currentRoute;
     if (current == AppRoutes.login || current == AppRoutes.splash) return;
     Get.offAllNamed(AppRoutes.login);
-    Get.snackbar(
-      'Phiên đăng nhập hết hạn',
-      'Vui lòng đăng nhập lại.',
-      snackPosition: SnackPosition.BOTTOM,
+    AppDialogs.showToast(
+      title: 'Phiên đăng nhập hết hạn',
+      message: 'Vui lòng đăng nhập lại.',
+      icon: Icons.warning_rounded,
     );
   }
 }

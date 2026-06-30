@@ -14,25 +14,8 @@ import '../../../../core/localization/language_enum.dart';
 import '../../../../core/theme/theme_service.dart';
 import '../controllers/auth_controller.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends GetView<AuthController> with ValidationMixin {
   const LoginView({super.key});
-
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> with ValidationMixin {
-  final AuthController controller = Get.find<AuthController>();
-  final _userCtrl = TextEditingController();
-  final _passCtrl = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    _userCtrl.dispose();
-    _passCtrl.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +25,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(24, 48, 24, 24),
           child: Form(
-            key: _formKey,
+            key: controller.loginFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -55,7 +38,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                 AppText.body('Sign in to continue to your account'),
                 const SizedBox(height: AppDimens.space32),
                 AppInput(
-                  controller: _userCtrl,
+                  controller: controller.loginUserCtrl,
                   label: LocaleKeys.auth_username.tr,
                   prefixIcon: Icons.person_outline,
                   required: true,
@@ -67,7 +50,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                 AppDimens.gap16,
                 Obx(
                   () => AppInput(
-                    controller: _passCtrl,
+                    controller: controller.loginPassCtrl,
                     label: LocaleKeys.auth_password.tr,
                     prefixIcon: Icons.lock_outline,
                     obscure: controller.obscure.value,
@@ -93,9 +76,7 @@ class _LoginViewState extends State<LoginView> with ValidationMixin {
                     loading: controller.isShowLoading.value,
                     onPressed: () {
                       context.hideKeyboard();
-                      if (_formKey.currentState!.validate()) {
-                        controller.login(_userCtrl.text, _passCtrl.text);
-                      }
+                      controller.submitLogin();
                     },
                   ),
                 ),

@@ -8,12 +8,18 @@
     "logout": "Đăng xuất",
     "retry": "Thử lại",
     "cancel": "Hủy",
+    "confirm": "Xác nhận",
     "name": "Tên",
     "code": "Mã",
     "price": "Giá",
     "stock": "Tồn kho",
     "image_url": "URL Hình ảnh",
-    "description": "Mô tả"
+    "description": "Mô tả",
+    "update": "Cập nhật",
+    "create": "Tạo mới",
+    "required": "Bắt buộc",
+    "invalid_number": "Số không hợp lệ",
+    "invalid_integer": "Số nguyên không hợp lệ"
   },
   "home": {
     "products": "Sản phẩm",
@@ -24,13 +30,20 @@
     "title": "Sản phẩm",
     "noProducts": "Không tìm thấy sản phẩm",
     "deleteProduct": "Xóa sản phẩm",
-    "deleteConfirm": "Bạn có chắc muốn xóa \"@name\"?"
+    "deleteConfirm": "Bạn có chắc muốn xóa \"@name\"?",
+    "editProduct": "Sửa sản phẩm",
+    "newProduct": "Sản phẩm mới",
+    "basicInfo": "Thông tin cơ bản",
+    "pricingStock": "Giá & Tồn kho",
+    "moreDetails": "Chi tiết khác"
   },
   "categories": {
     "title": "Danh mục",
     "noCategories": "Chưa có danh mục nào",
     "deleteCategory": "Xóa danh mục",
-    "deleteConfirm": "Bạn có chắc muốn xóa \"@name\"?"
+    "deleteConfirm": "Bạn có chắc muốn xóa \"@name\"?",
+    "editCategory": "Sửa danh mục",
+    "newCategory": "Danh mục mới"
   },
   "cart": {
     "title": "Giỏ hàng",

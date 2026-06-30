@@ -11,10 +11,8 @@ import '../../../profile/presentation/views/profile_view.dart';
 import '../controllers/shell_controller.dart';
 
 /// Home shell: chứa các tab chính phía sau một bottom navigation bar.
-class HomeView extends StatelessWidget {
+class HomeView extends GetView<ShellController> {
   HomeView({super.key});
-
-  final _shell = Get.find<ShellController>();
   final _pages = <Widget>[
     ProductListView(),
     const CategoryListView(),
@@ -26,9 +24,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () => IndexedStack(index: _shell.index.value, children: _pages),
+        () => IndexedStack(index: controller.index.value, children: _pages),
       ),
-      bottomNavigationBar: _BottomNav(shell: _shell),
+      bottomNavigationBar: _BottomNav(shell: controller),
     );
   }
 }
